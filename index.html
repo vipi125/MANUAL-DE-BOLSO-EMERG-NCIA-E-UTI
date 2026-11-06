@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="Fernando Luis Godoy">
+<meta name="description" content="Manual de bolso de emergência e UTI para adultos — doses, preparo, administração, acesso vascular, AVC e procedimentos. Versão 1.0, 06/11/2026.">
+<title>Manual de Bolso - Emergência e UTI | Fernando Luis Godoy</title>
+<style>
+    :root {
+        --primary-blue: #0b3d91;
+        --accent-blue: #1565c0;
+        --light-blue: #e3f2fd;
+        --alert-red: #c62828;
+        --alert-bg: #ffebee;
+        --text-dark: #1f2328;
+        --text-muted: #57606a;
+        --bg-page: #ffffff;
+        --bg-body: #eef1f4;
+        --border-color: #d0d7de;
+        --border-soft: #e5e9ed;
+        --sidebar-width: 300px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        background: var(--bg-body);
+        color: var(--text-dark);
+        line-height: 1.65;
+        font-size: 16px;
+        display: flex;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---------- Sidebar ---------- */
+    .sidebar {
+        width: var(--sidebar-width);
+        background: var(--primary-blue);
+        color: #fff;
+        position: fixed;
+        inset: 0 auto 0 0;
+        height: 100vh;
+        overflow-y: auto;
+        transition: transform .3s ease;
+        z-index: 1000;
+        padding: 24px 0 40px;
+        border-right: 1px solid rgba(0,0,0,.15);
+    }
+    .sidebar h2 {
+        text-align: left;
+        font-size: 1.05rem;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        margin: 0 20px 18px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid rgba(255,255,255,.18);
+        font-weight: 600;
+    }
+    .sidebar a {
+        display: block;
+        color: rgba(255,255,255,.85);
+        padding: 10px 20px 10px 24px;
+        text-decoration: none;
+        font-size: .92rem;
+        border-left: 3px solid transparent;
+        transition: background .15s, border-color .15s, color .15s;
+    }
+    .sidebar a:hover,
+    .sidebar a.active {
+        background: rgba(255,255,255,.10);
+        color: #fff;
+        border-left-color: #fff;
+    }
+    .sidebar-footer {
+        margin-top: 28px;
+        padding: 16px 20px 0;
+        border-top: 1px solid rgba(255,255,255,.18);
+        font-size: .78rem;
+        color: rgba(255,255,255,.65);
+        line-height: 1.45;
+    }
+    .sidebar-footer strong { color: rgba(255,255,255,.9); }
+
+    /* ---------- Main ---------- */
+    .main-content {
+        margin-left: var(--sidebar-width);
+        padding: 36px 44px 80px;
+        width: calc(100% - var(--sidebar-width));
+        max-width: 1040px;
+        background: var(--bg-page);
+        min-height: 100vh;
+    }
+
+    /* Mobile header */
+    .mobile-header {
+        display: none;
+        background: var(--primary-blue);
+        color: #fff;
+        padding: 14px 18px;
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        align-items: center;
+        justify-content: space-between;
+        font-weight: 600;
+    }
+    .menu-btn {
+        background: none; border: none; color: #fff;
+        font-size: 1.5rem; cursor: pointer; line-height: 1;
+    }
+
+    /* ---------- Content blocks ---------- */
+    .section {
+        background: transparent;
+        border: none;
+        border-top: 1px solid var(--border-soft);
+        padding: 34px 0 10px;
+        margin-bottom: 24px;
+        scroll-margin-top: 90px;
+    }
+    .section:first-of-type { border-top: none; padding-top: 6px; }
+
+    h1 {
+        color: var(--primary-blue);
+        font-size: 1.55rem;
+        font-weight: 700;
+        letter-spacing: .01em;
+        margin-bottom: 16px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid var(--light-blue);
+    }
+    h2 {
+        color: var(--primary-blue);
+        font-size: 1.15rem;
+        font-weight: 600;
+        margin: 24px 0 12px;
+    }
+    p { margin-bottom: 14px; }
+    strong { color: #0d1117; }
+
+    ul, ol { margin: 0 0 16px 22px; }
+    li { margin-bottom: 7px; }
+
+    /* Alerts / highlights */
+    .alert {
+        background: var(--alert-bg);
+        border-left: 4px solid var(--alert-red);
+        padding: 14px 18px;
+        margin: 18px 0;
+        border-radius: 0 4px 4px 0;
+    }
+    .alert-title {
+        color: var(--alert-red);
+        font-weight: 700;
+        display: block;
+        margin-bottom: 6px;
+        letter-spacing: .02em;
+        text-transform: uppercase;
+        font-size: .85rem;
+    }
+    .highlight {
+        background: #f6f9fc;
+        border: 1px solid var(--light-blue);
+        border-left: 4px solid var(--primary-blue);
+        padding: 14px 18px;
+        margin: 18px 0;
+        border-radius: 0 4px 4px 0;
+    }
+
+    /* Disclaimer block */
+    .disclaimer {
+        background: #f8f9fa;
+        border: 1px dashed var(--border-color);
+        padding: 14px 18px;
+        margin: 18px 0;
+        font-size: .9rem;
+        color: var(--text-muted);
+        border-radius: 4px;
+    }
+
+    /* Author credit box */
+    .author-box {
+        margin-top: 24px;
+        padding: 16px 18px;
+        background: #f6f9fc;
+        border-left: 4px solid var(--primary-blue);
+        border-radius: 0 4px 4px 0;
+        font-size: .9rem;
+    }
+    .author-box p { margin: 0 0 6px; }
+    .author-box p:last-child { margin-bottom: 0; color: var(--text-muted); }
+
+    /* ---------- Tables ---------- */
+    .table-responsive {
+        overflow-x: auto;
+        margin: 12px 0 22px;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: .92rem;
+        background: #fff;
+    }
+    th, td {
+        border-bottom: 1px solid var(--border-soft);
+        padding: 11px 13px;
+        text-align: left;
+        vertical-align: top;
+    }
+    th {
+        background: var(--primary-blue);
+        color: #fff;
+        font-weight: 600;
+        font-size: .85rem;
+        text-transform: uppercase;
+        letter-spacing: .03em;
+    }
+    tbody tr:nth-child(even) { background: #fafbfc; }
+    tbody tr:hover { background: var(--light-blue); }
+    tbody tr:last-child td { border-bottom: none; }
+
+    /* ---------- Back to top ---------- */
+    .to-top {
+        position: fixed;
+        right: 24px;
+        bottom: 24px;
+        background: var(--primary-blue);
+        color: #fff;
+        border: none;
+        width: 44px; height: 44px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1.2rem;
+        box-shadow: 0 3px 10px rgba(0,0,0,.2);
+        display: none;
+        z-index: 500;
+    }
+    .to-top.visible { display: block; }
+
+    /* ---------- Refs ---------- */
+    .refs { font-size: .86rem; color: var(--text-muted); }
+    .refs li { margin-bottom: 10px; word-break: break-word; }
+    .refs a { color: var(--accent-blue); text-decoration: none; }
+    .refs a:hover { text-decoration: underline; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 992px) {
+        .sidebar { transform: translateX(-100%); }
+        .sidebar.active { transform: translateX(0); }
+        .main-content {
+            margin-left: 0;
+            width: 100%;
+            padding: 22px 20px 80px;
+        }
+        .mobile-header { display: flex; }
+    }
+    @media (max-width: 576px) {
+        body { font-size: 15px; }
+        .main-content { padding: 16px 14px 70px; }
+        h1 { font-size: 1.3rem; }
+        h2 { font-size: 1.05rem; }
+        table { font-size: .82rem; }
+        th, td { padding: 8px 9px; }
+    }
+
+    /* Backdrop */
+    .backdrop {
+        display: none;
+        position: fixed; inset: 0;
+        background: rgba(0,0,0,.5);
+        z-index: 998;
+    }
+    .backdrop.active { display: block; }
+
+    /* ---------- Print ---------- */
+    @media print {
+        body { background: #fff; display: block; }
+        .sidebar, .mobile-header, .backdrop, .to-top { display: none !important; }
+        .main-content {
+            margin: 0; width: 100%; max-width: 100%;
+            padding: 0; background: #fff;
+        }
+        .section { page-break-inside: avoid; border-top: 1px solid #ccc; }
+        h1 { page-break-after: avoid; }
+        table { page-break-inside: auto; }
+        tr { page-break-inside: avoid; }
+        a { color: inherit; text-decoration: none; }
+        .alert, .highlight { break-inside: avoid; }
+        .section#sec10::before {
+            content: "Fernando Luis Godoy — Manual de Bolso: Emergência e UTI (Adultos) — v1.0, 06/11/2026";
+            display: block;
+            font-size: .8rem;
+            color: #666;
+            text-align: center;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+    }
+</style>
+</head>
+<body>
+
+<!-- Mobile header -->
+<div class="mobile-header">
+    <span>Manual Emergência e UTI</span>
+    <button class="menu-btn" onclick="toggleMenu()" aria-label="Abrir menu">☰</button>
+</div>
+
+<div class="backdrop" onclick="toggleMenu()"></div>
+
+<!-- Sidebar -->
+<nav class="sidebar" id="sidebar">
+    <h2>Índice</h2>
+    <a href="#intro" onclick="closeMenu()">Início e Segurança</a>
+    <a href="#sec1" onclick="closeMenu()">1. Abordagem Inicial</a>
+    <a href="#sec2" onclick="closeMenu()">2. Vasopressores e Inotrópicos</a>
+    <a href="#sec3" onclick="closeMenu()">3. Sedação e Intubação</a>
+    <a href="#sec4" onclick="closeMenu()">4. Anti-hipertensivos IV</a>
+    <a href="#sec5" onclick="closeMenu()">5. PCR e Arritmias</a>
+    <a href="#sec6" onclick="closeMenu()">6. Emergências Metabólicas</a>
+    <a href="#sec7" onclick="closeMenu()">7. AVC Agudo</a>
+    <a href="#sec8" onclick="closeMenu()">8. Anestesia Local e Sutura</a>
+    <a href="#sec9" onclick="closeMenu()">9. Acesso Venoso Central</a>
+    <a href="#sec10" onclick="closeMenu()">10. Checklists e Referências</a>
+
+    <div class="sidebar-footer">
+        <strong>Autor</strong><br>
+        Fernando Luis Godoy<br>
+        <span style="display:inline-block; margin-top:6px;">Versão 1.0 • 06/11/2026</span>
+    </div>
+</nav>
+
+<main class="main-content">
+
+<!-- ============ INTRO ============ -->
+<div id="intro" class="section">
+    <div style="text-align:center; margin-bottom: 22px;">
+        <h1 style="border-bottom:none; margin-bottom:4px; font-size:1.8rem;">MANUAL DE BOLSO</h1>
+        <p style="font-size:1.15rem; font-weight:600; color:var(--primary-blue); margin:0;">
+            EMERGÊNCIA E UTI | Adultos
+        </p>
+        <p style="color:var(--text-muted); margin:10px 0 0; font-size:.95rem;">
+            <strong style="color:var(--text-dark);">Autor:</strong> Fernando Luis Godoy
+        </p>
+        <p style="color:var(--text-muted); margin:6px 0 0;">
+            Doses, preparo, administração, acesso vascular, AVC e procedimentos<br>
+            <strong>Versão 1.0 • 06 de novembro de 2026</strong>
+        </p>
+    </div>
+
+    <div class="disclaimer">
+        Material educacional de consulta rápida. Não substitui avaliação médica, prescrição
+        individual, treinamento prático, bula, protocolo institucional ou supervisão de
+        profissional habilitado.
+    </div>
+
+    <p><em>Escopo: adultos. Doses pediátricas não incluídas. As concentrações e diluições são exemplos de referência e precisam ser confrontadas com a apresentação disponível, compatibilidade, bomba, acesso e padronização da instituição.</em></p>
+
+    <div class="alert">
+        <span class="alert-title">Leia antes de usar — Segurança</span>
+        <p>Medicamentos vasoativos, sedativos, bloqueadores neuromusculares, trombolíticos e eletrólitos concentrados são medicamentos de alto risco. Faça dupla checagem independente de paciente, peso, dose, unidade, concentração, via, bomba e velocidade. Nunca programe uma bomba apenas pelo nome comercial.</p>
+        <p><strong>Unidades:</strong> mcg = micrograma; mg = miligrama; mcg/kg/min = microgramas por quilograma por minuto. Confundir mg com mcg pode causar erro grave. Em infusão, registrar sempre dose prescrita + concentração final + velocidade em mL/h.</p>
+        <p><strong>Fórmula da bomba:</strong> mL/h = [dose (mcg/kg/min) × peso (kg) × 60] ÷ concentração (mcg/mL). Para dose em mcg/min, retirar o peso da fórmula. Para mg/h, converter concentração para mg/mL.</p>
+    </div>
+
+    <div class="highlight">
+        <strong>Central versus periférico:</strong> acesso central não é requisito absoluto para iniciar noradrenalina em choque ameaçador à vida. Se necessário, iniciar temporariamente em veia periférica calibrosa, proximal, bem posicionada, com inspeção frequente e protocolo institucional; providenciar acesso central se infusão prolongada, doses crescentes, múltiplas drogas ou acesso periférico inadequado. Extravasamento exige interrupção imediata, aspiração pelo cateter se possível e protocolo local de tratamento.
+    </div>
+</div>
+
+<!-- ============ 1 ============ -->
+<div id="sec1" class="section">
+    <h1>1. ABORDAGEM INICIAL</h1>
+    <p><strong>ABCDE:</strong> <strong>A</strong> — via aérea e proteção cervical quando indicada; <strong>B</strong> — ventilação/oxigenação; <strong>C</strong> — circulação, hemorragia, perfusão e monitor; <strong>D</strong> — estado neurológico, pupilas, glicemia; <strong>E</strong> — exposição completa, temperatura e prevenção de hipotermia.</p>
+    <p><strong>Primeiros minutos:</strong> chamar ajuda; monitor cardíaco, PA seriada e oximetria; dois acessos IV (ou IO se necessário); glicemia capilar; ECG; coleta direcionada; avaliar necessidade de oxigênio, ventilação, fluidos, sangue, vasopressor ou controle de foco.</p>
+
+    <h2>Choque: pense em 4 grupos</h2>
+    <ul>
+        <li><strong>Hipovolêmico:</strong> hemorragia/perda de volume — controlar causa e repor volume/sangue.</li>
+        <li><strong>Distributivo:</strong> sepse/anafilaxia — tratar causa, volume conforme responsividade e vasopressor quando indicado.</li>
+        <li><strong>Cardiogênico:</strong> falência de bomba — evitar volume indiscriminado; considerar vasopressor/inotrópico e reperfusão/causa.</li>
+        <li><strong>Obstrutivo:</strong> TEP maciço, tamponamento, pneumotórax hipertensivo — tratar obstrução; vasopressor é ponte, não tratamento definitivo.</li>
+    </ul>
+
+    <p><strong>RUSH:</strong> bomba (coração), tanque (volume/veias), canos (aorta/vasos), pulmões e causas obstrutivas. Ultrassom à beira-leito complementa, não substitui exame clínico.</p>
+    <p><strong>DOPES — deterioração súbita no intubado:</strong> Deslocamento do tubo; Obstrução; Pneumotórax; falha do Equipamento; Stacking/auto-PEEP. Verificar capnografia, expansão, ausculta, pressão de vias aéreas e circuito.</p>
+    <p><strong>Hs e Ts na PCR:</strong> hipovolemia, hipóxia, H+ (acidose), hipo/hipercalemia e distúrbios metabólicos, hipotermia; tensão no tórax (pneumotórax), tamponamento, tóxicos, trombose pulmonar e coronariana.</p>
+</div>
+
+<!-- ============ 2 ============ -->
+<div id="sec2" class="section">
+    <h1>2. VASOPRESSORES E INOTRÓPICOS</h1>
+    <p>A escolha depende do fenótipo do choque, perfusão, pressão, volemia, função ventricular, ritmo e causa. Titular para objetivo clínico (frequentemente PAM inicial ≥ 65 mmHg no choque séptico, individualizando). Não tratar apenas o número da pressão.</p>
+
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr><th>Droga</th><th>Dose IV de referência em adulto</th><th>Pontos práticos / alertas</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Noradrenalina</strong></td>
+                    <td>Iniciar frequentemente 0,05–0,1 mcg/kg/min; titular conforme resposta. Faixas variam amplamente (p.ex. 0,05–1 mcg/kg/min).</td>
+                    <td>1ª linha no choque séptico. Predomínio alfa; pode causar isquemia periférica/extravasamento e arritmias. Central preferível se uso prolongado/doses crescentes; periférico proximal pode ser ponte monitorada.</td>
+                </tr>
+                <tr>
+                    <td><strong>Adrenalina</strong></td>
+                    <td>Infusão 0,02–0,5 mcg/kg/min, titulada; PCR: 1 mg IV/IO a cada 3–5 min conforme ACLS.</td>
+                    <td>Pode aumentar lactato, FC e consumo miocárdico. Anafilaxia: IM 0,3–0,5 mg (1 mg/mL) na face anterolateral da coxa, repetir a cada 5–15 min conforme resposta.</td>
+                </tr>
+                <tr>
+                    <td><strong>Vasopressina</strong></td>
+                    <td>0,03 U/min em infusão fixa é uso frequente como adjuvante; seguir protocolo local.</td>
+                    <td>Choque vasodilatado refratário à noradrenalina. Não titular como se fosse catecolamina; risco de isquemia cutânea/mesentérica.</td>
+                </tr>
+                <tr>
+                    <td><strong>Dobutamina</strong></td>
+                    <td>2–20 mcg/kg/min, iniciar baixo e titular.</td>
+                    <td>Baixo débito/disfunção miocárdica com hipoperfusão após otimização de volume e pressão. Pode causar taquicardia, arritmia e hipotensão.</td>
+                </tr>
+                <tr>
+                    <td><strong>Dopamina</strong></td>
+                    <td>5–20 mcg/kg/min; evitar uso rotineiro no choque séptico.</td>
+                    <td>Maior risco de arritmias; pode ser considerada em cenários selecionados, inclusive bradicardia com hipotensão quando apropriado.</td>
+                </tr>
+                <tr>
+                    <td><strong>Fenilefrina</strong></td>
+                    <td>Infusão conforme protocolo institucional; frequentemente 0,2–3 mcg/kg/min.</td>
+                    <td>Agonista alfa predominante; pode reduzir débito por aumento de pós-carga/bradicardia reflexa. Uso seletivo, não substituto universal da noradrenalina.</td>
+                </tr>
+                <tr>
+                    <td><strong>Milrinona</strong></td>
+                    <td>Ataque geralmente evitado no instável; infusão 0,125–0,75 mcg/kg/min, ajustar à função renal.</td>
+                    <td>Inodilatador; pode piorar hipotensão. Cautela em insuficiência renal, arritmias e hipotensão.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="highlight">
+        <p><strong>Noradrenalina — exemplo de preparo:</strong> se ampola e protocolo institucional permitirem, 4 mg em volume final de 250 mL = 16 mcg/mL. A apresentação comercial e a quantidade expressa como sal/base variam: conferir rótulo e padronização da farmácia. Exemplo didático para 70 kg a 0,1 mcg/kg/min: (0,1 × 70 × 60) ÷ 16 = 26,25 mL/h. Não copiar velocidade sem confirmar concentração real.</p>
+        <p><strong>Vasopressor periférico:</strong> usar veia calibrosa em membro superior, preferencialmente proximal; evitar mão/punho e membro com perfusão comprometida. Inspecionar frequentemente o sítio e documentar. Dor, palidez, edema ou resistência = suspeitar extravasamento. Acesso central é indicado quando infusão prolongada, múltiplos vasoativos, necessidade de concentrações maiores, acesso periférico ruim ou monitorização/terapia adicional.</p>
+    </div>
+</div>
+
+<!-- ============ 3 ============ -->
+<div id="sec3" class="section">
+    <h1>3. SEDAÇÃO, ANALGESIA E INTUBAÇÃO</h1>
+    <p>Princípio: analgesia primeiro quando há dor; definir alvo de sedação (p.ex. RASS), reavaliar frequentemente e evitar sedação profunda sem indicação. Após bloqueador neuromuscular, sedação e analgesia contínuas devem estar garantidas: paralisia não significa inconsciência.</p>
+
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr><th>Droga</th><th>Dose de referência</th><th>Alertas / contexto</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Fentanila</strong></td>
+                    <td>Bolus 0,5–1 mcg/kg IV lento; infusão 0,5–2 mcg/kg/h (faixas maiores em UTI conforme protocolo).</td>
+                    <td>Analgesia; depressão respiratória, bradicardia, hipotensão e rigidez torácica com bolus rápido/altas doses.</td>
+                </tr>
+                <tr>
+                    <td><strong>Midazolam</strong></td>
+                    <td>Bolus 1–2 mg IV lento, repetir em pequenos incrementos; infusão 0,02–0,1 mg/kg/h conforme alvo/protocolo.</td>
+                    <td>Acumula em idosos e disfunção hepatorrenal; hipotensão e depressão respiratória, especialmente com opioides. Não é primeira escolha universal para sedação prolongada.</td>
+                </tr>
+                <tr>
+                    <td><strong>Propofol</strong></td>
+                    <td>Infusão frequentemente 5–50 mcg/kg/min, titulada; reduzir em instabilidade.</td>
+                    <td>Hipotensão, depressão respiratória; monitorar triglicerídeos e risco de síndrome de infusão do propofol em doses altas/prolongadas.</td>
+                </tr>
+                <tr>
+                    <td><strong>Cetamina</strong></td>
+                    <td>Indução RSI 1–2 mg/kg IV; analgesia em doses menores conforme protocolo; infusão de sedação conforme UTI.</td>
+                    <td>Pode elevar FC/PA, mas em choque catecolamino-depletado pode causar depressão miocárdica. Hipersalivação e fenômenos de emergência.</td>
+                </tr>
+                <tr>
+                    <td><strong>Dexmedetomidina</strong></td>
+                    <td>Infusão 0,2–0,7 mcg/kg/h (alguns protocolos até 1,5); frequentemente sem dose de ataque.</td>
+                    <td>Sedação cooperativa; bradicardia e hipotensão. Não oferece analgesia suficiente isoladamente.</td>
+                </tr>
+                <tr>
+                    <td><strong>Etomidato</strong></td>
+                    <td>Indução 0,2–0,3 mg/kg IV.</td>
+                    <td>Pouco impacto hemodinâmico relativo; mioclonias e supressão adrenal transitória. Não manter como sedativo.</td>
+                </tr>
+                <tr>
+                    <td><strong>Rocurônio</strong></td>
+                    <td>RSI 1–1,2 mg/kg IV.</td>
+                    <td>Bloqueio prolongado; garantir sedação/analgesia pós-intubação e ventilação. Não usar sem plano de via aérea.</td>
+                </tr>
+                <tr>
+                    <td><strong>Succinilcolina</strong></td>
+                    <td>RSI 1–1,5 mg/kg IV.</td>
+                    <td>Evitar em hipercalemia ou risco: queimadura/lesão muscular após fase aguda, denervação, doenças neuromusculares, rabdomiólise, história de hipertermia maligna.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="highlight">
+        <p><strong>RSI — sequência de memória:</strong> PREPARAR (equipe, plano A/B/C, sucção, monitor, drogas pós-IOT) → PRÉ-OXIGENAR → OTIMIZAR hemodinâmica → INDUZIR/PARALISAR → INTUBAR/CONFIRMAR com capnografia em onda → FIXAR → SEDAR/ANALGESIAR → VENTILAR e reavaliar.</p>
+        <p><strong>Antes da indução:</strong> antecipar hipotensão peri-intubação; corrigir hipoxemia e hipotensão quando possível; preparar vasopressor conforme contexto. Confirmar tubo com capnografia contínua; ausculta isolada não é confirmação suficiente.</p>
+    </div>
+</div>
+
+<!-- ============ 4 ============ -->
+<div id="sec4" class="section">
+    <h1>4. ANTI-HIPERTENSIVOS IV</h1>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr><th>Droga</th><th>Dose / preparo de referência</th><th>Quando considerar / evitar</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Nitroglicerina (NTG)</strong></td>
+                    <td>Iniciar 5–10 mcg/min; titular a cada 3–5 min conforme resposta. Concentração-exemplo: 50 mg em volume final 250 mL = 200 mcg/mL.</td>
+                    <td>Útil em isquemia miocárdica e edema agudo de pulmão hipertensivo. Evitar com hipotensão, infarto de VD/situação dependente de pré-carga, uso recente de inibidor PDE-5 (sildenafil/vardenafil 24 h; tadalafil 48 h, em geral) ou riociguate.</td>
+                </tr>
+                <tr>
+                    <td><strong>Nitroprussiato (NPS)</strong></td>
+                    <td>Iniciar 0,3 mcg/kg/min; titular. Faixa usual 0,3–10 mcg/kg/min. Exemplo: 50 mg em volume final 250 mL = 200 mcg/mL; proteger da luz.</td>
+                    <td>Vasodilatador potente arterial/venoso; exige monitorização contínua e ambiente apropriado. Risco de hipotensão e toxicidade por cianeto/tiocianato; cautela em insuficiência renal/hepática, gestação e hipertensão intracraniana.</td>
+                </tr>
+                <tr>
+                    <td><strong>Labetalol</strong></td>
+                    <td>10–20 mg IV em 1–2 min; pode repetir/titular conforme protocolo (p.ex. 20–80 mg em intervalos).</td>
+                    <td>Cuidado com bradicardia, BAV, choque, IC descompensada e broncoespasmo.</td>
+                </tr>
+                <tr>
+                    <td><strong>Hidralazina</strong></td>
+                    <td>5–10 mg IV lento em situações selecionadas; resposta variável.</td>
+                    <td>Pode causar taquicardia reflexa e queda imprevisível da PA; evitar como escolha rotineira em muitas emergências hipertensivas.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="alert">
+        <span class="alert-title">Correção crítica de unidade</span>
+        <p>Nitroprussiato é prescrito em <strong>mcg/kg/min</strong>, não mg/kg/min. A diferença é mil vezes. Nunca converter sem conferir concentração e unidade.</p>
+    </div>
+    <p><strong>Regra de crise hipertensiva:</strong> emergência hipertensiva = lesão aguda de órgão-alvo; tratar órgão-alvo e reduzir PA de forma controlada. Não reduzir abruptamente em todo paciente. AVC, dissecção de aorta, edema pulmonar, SCA e pré-eclâmpsia têm metas e drogas específicas.</p>
+</div>
+
+<!-- ============ 5 ============ -->
+<div id="sec5" class="section">
+    <h1>5. PCR E ARRITMIAS — DOSES-CHAVE</h1>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr><th>Situação</th><th>Conduta / dose adulta de referência</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>FV/TV sem pulso</strong></td>
+                    <td>Desfibrilar + RCP de alta qualidade. Adrenalina 1 mg IV/IO a cada 3–5 min. Amiodarona 300 mg IV/IO após choques indicados; segunda dose 150 mg. Lidocaína é alternativa conforme algoritmo.</td>
+                </tr>
+                <tr>
+                    <td><strong>AESP/assistolia</strong></td>
+                    <td>RCP + adrenalina 1 mg IV/IO a cada 3–5 min; procurar Hs e Ts. Não desfibrilar.</td>
+                </tr>
+                <tr>
+                    <td><strong>Bradicardia sintomática</strong></td>
+                    <td>Atropina 1 mg IV a cada 3–5 min, máximo 3 mg. Se ineficaz: marca-passo transcutâneo e/ou infusão de adrenalina 2–10 mcg/min ou dopamina 5–20 mcg/kg/min, conforme cenário.</td>
+                </tr>
+                <tr>
+                    <td><strong>Taquicardia instável com pulso</strong></td>
+                    <td>Cardioversão sincronizada imediata; sedar se possível sem atrasar. Energia conforme ritmo/aparelho.</td>
+                </tr>
+                <tr>
+                    <td><strong>Taquicardia regular QRS estreito estável</strong></td>
+                    <td>Manobras vagais; adenosina 6 mg IV em bolus rápido + flush; se necessário 12 mg. Monitor e desfibrilador disponíveis.</td>
+                </tr>
+                <tr>
+                    <td><strong>TV monomórfica estável</strong></td>
+                    <td>Amiodarona 150 mg IV em 10 min, repetir se necessário; depois infusão conforme protocolo. Considerar procainamida onde disponível e apropriada.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p><strong>Atenção:</strong> doses de ACLS são para contextos definidos pelo algoritmo; não transpor automaticamente para paciente com pulso, arritmia estável ou infusão de manutenção. Adenosina: evitar em taquicardia irregular/polimórfica e cautela em asma grave; não usar para FA com pré-excitação.</p>
+    <p>Consultar os algoritmos oficiais AHA 2025 antes do uso; energia de cardioversão/desfibrilação deve seguir o equipamento e o ritmo.</p>
+</div>
+
+<!-- ============ 6 ============ -->
+<div id="sec6" class="section">
+    <h1>6. EMERGÊNCIAS METABÓLICAS SELECIONADAS</h1>
+    <p><strong>Hipercalemia:</strong> estabilizar membrana se alteração eletrocardiográfica/toxicidade; deslocar K para dentro da célula; remover K do organismo e tratar causa. Repetir ECG, potássio e glicemia.</p>
+
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr><th>Intervenção</th><th>Dose adulta de referência</th><th>Cuidados</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Gluconato de cálcio 10%</strong></td>
+                    <td>30 mL IV em 10 min em protocolos que usam gluconato; pode repetir conforme ECG/protocolo.</td>
+                    <td>Proteção miocárdica, não reduz potássio. Monitor ECG. <em>Cloreto de cálcio 10% 10 mL</em> fornece mais cálcio elementar e é preferível em peri-parada/central; extravasamento lesivo.</td>
+                </tr>
+                <tr>
+                    <td><strong>Insulina regular + glicose</strong></td>
+                    <td>10 U IV + 25 g glicose (p.ex. 50 mL glicose 50%), conforme protocolo.</td>
+                    <td>Risco de hipoglicemia tardia; monitorar glicemia seriada por várias horas e ajustar aporte de glicose.</td>
+                </tr>
+                <tr>
+                    <td><strong>Salbutamol nebulizado</strong></td>
+                    <td>10–20 mg nebulizado como adjuvante.</td>
+                    <td>Pode causar taquicardia/tremor; não usar isoladamente.</td>
+                </tr>
+                <tr>
+                    <td><strong>Bicarbonato de sódio</strong></td>
+                    <td>Não usar rotineiramente para toda hipercalemia; considerar em acidose metabólica importante ou situações específicas de PCR conforme protocolo.</td>
+                    <td>Sódio/volume, alcalose e alterações de cálcio; não misturar na mesma linha com cálcio.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <ul>
+        <li><strong>Hipoglicemia grave:</strong> se acesso IV, glicose IV titulada à resposta (concentração/volume conforme protocolo e acesso); sem acesso, glucagon IM/SC conforme apresentação. Reavaliar glicemia e causa. Evitar extravasamento de soluções hipertônicas.</li>
+        <li><strong>Convulsão/status:</strong> benzodiazepínico é primeira linha imediata (p.ex. lorazepam 0,1 mg/kg IV, máximo 4 mg; ou midazolam 10 mg IM em adulto conforme protocolo). Se persistente, carga anticonvulsivante (levetiracetam, valproato ou fosfenitoína/fenitoína conforme contexto e contraindicações) e suporte de via aérea. Corrigir glicemia, eletrólitos e causa.</li>
+        <li><strong>Anafilaxia:</strong> adrenalina IM 0,3–0,5 mg (solução 1 mg/mL) na coxa, repetir 5–15 min se necessário; decúbito, oxigênio, cristaloide se choque e broncodilatador para broncoespasmo. Anti-histamínicos/corticoides são adjuvantes e não substituem adrenalina.</li>
+    </ul>
+</div>
+
+<!-- ============ 7 ============ -->
+<div id="sec7" class="section">
+    <h1>7. AVC AGUDO — FLUXO PRÁTICO</h1>
+    <p><strong>Reconhecer → horário → imagem → decidir reperfusão.</strong> Registrar última vez visto bem (last known well), NIHSS, glicemia, anticoagulantes, cirurgia/sangramento recente e incapacidade prévia. TC sem contraste urgente para excluir hemorragia; angio-TC quando suspeita de oclusão de grande vaso. Não atrasar trombólise elegível por imagem avançada desnecessária.</p>
+
+    <p><strong>AVC isquêmico:</strong> avaliar trombólise IV até 4,5 h em paciente elegível. A diretriz AHA/ASA 2026 recomenda alteplase 0,9 mg/kg (máx. 90 mg) ou tenecteplase 0,25 mg/kg (máx. 25 mg). Protocolos nacionais, disponibilidade, registro sanitário e protocolo institucional podem divergir; confirmar protocolo vigente do serviço/SUS.</p>
+
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr><th>Fármaco</th><th>Dose e administração</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Alteplase (rt-PA)</strong></td>
+                    <td>0,9 mg/kg IV, máximo 90 mg. Administrar 10% em bolus durante 1 min e 90% em infusão durante 60 min.</td>
+                </tr>
+                <tr>
+                    <td><strong>Tenecteplase (TNK)</strong></td>
+                    <td>0,25 mg/kg em bolus único, máximo 25 mg. Não usar 0,4 mg/kg para AVC.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p><strong>Pressão arterial:</strong> antes da trombólise, reduzir para &lt;185/110 mmHg; após IVT, manter ≤180/105 mmHg por 24 h. Não fazer redução intensiva indiscriminada para PAS &lt;140 após reperfusão; AHA/ASA 2026 alerta ausência de benefício e possível dano em cenários pós-EVT. Sem reperfusão, em geral não reduzir se PA &lt;220/120 mmHg, salvo outra emergência que exija tratamento; se acima, redução cautelosa individualizada.</p>
+    <p><strong>Após trombólise:</strong> unidade de AVC/UTI; PA e avaliação neurológica a cada 15 min por 2 h, a cada 30 min por 6 h e depois de hora em hora até 24 h. Se cefaleia intensa, vômitos, hipertensão aguda ou piora neurológica: interromper alteplase se em curso, TC urgente e protocolo de hemorragia. Evitar antiagregante/anticoagulante e procedimentos invasivos não essenciais nas primeiras 24 h; imagem de controle antes de iniciar antitrombóticos.</p>
+
+    <div class="alert">
+        <span class="alert-title">Contraindicações/alertas para IVT</span>
+        <p>Hemorragia intracraniana na imagem; sangramento ativo importante; suspeita de dissecção aórtica/endocardite infecciosa; PA não controlável abaixo do limite; coagulopatia/anticoagulante com efeito relevante; cirurgia/trauma recente ou lesão intracraniana conforme critérios da diretriz. A lista completa é extensa e depende do tempo, fármaco, exames e protocolo. Usar checklist oficial de elegibilidade, não esta lista resumida como triagem final.</p>
+    </div>
+
+    <p><strong>Trombectomia mecânica:</strong> procedimento endovascular para retirada do trombo em oclusão de grande vaso. Em pacientes selecionados, janela até 6 h e até 24 h por critérios clínico-radiológicos; basilar também pode ter indicação em selecionados. Não é medicamento. Se paciente elegível para IVT e EVT, administrar trombólise sem atrasar a transferência/procedimento. Trombólise não substitui trombectomia quando esta está indicada.</p>
+    <p><strong>AVC hemorrágico:</strong> não trombolisar. Manejo envolve controle pressórico individualizado, reversão rápida de anticoagulação quando indicada, neurocirurgia/neurointensivismo, controle de pressão intracraniana e tratamento da causa. Aspirina não é tratamento de reperfusão do AVC isquêmico.</p>
+</div>
+
+<!-- ============ 8 ============ -->
+<div id="sec8" class="section">
+    <h1>8. ANESTESIA LOCAL E SUTURA</h1>
+    <p><strong>Antes de anestesiar:</strong> avaliar alergias, peso, comorbidades, perfusão distal, contaminação, mecanismo, tempo, corpo estranho, lesão tendínea/vascular/nervosa, fratura e necessidade de imagem/encaminhamento. Documentar exame neurovascular antes do bloqueio.</p>
+
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr><th>Anestésico</th><th>Dose máxima de referência em adulto</th><th>Observações</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Lidocaína sem vasoconstritor</strong></td>
+                    <td>4,5 mg/kg; máximo usual 300 mg.</td>
+                    <td>A dose máxima depende da bula/protocolo; usar a menor dose eficaz. 1% = 10 mg/mL | 2% = 20 mg/mL</td>
+                </tr>
+                <tr>
+                    <td><strong>Lidocaína com epinefrina</strong></td>
+                    <td>7 mg/kg; máximo usual 500 mg.</td>
+                    <td>Evitar injeção intravascular; cautela em áreas de circulação terminal comprometida e cardiopatia/taquiarritmia. A evidência permite uso digital em muitos pacientes, mas considerar perfusão e protocolo.</td>
+                </tr>
+                <tr>
+                    <td><strong>Bupivacaína</strong></td>
+                    <td>2 mg/kg sem epinefrina (máx. usual 175 mg); com epinefrina até 3 mg/kg (máx. usual 225 mg).</td>
+                    <td>Cardiotoxicidade potencialmente grave; injetar fracionado, aspirando e monitorando.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p><strong>Conta rápida da lidocaína:</strong> dose total (mg) = concentração (mg/mL) × volume (mL). Ex.: lidocaína 2% = 20 mg/mL; seringa de 10 mL = 200 mg. Em paciente de 85 kg, limites teóricos: sem vasoconstritor 382,5 mg (mas limitado ao máximo absoluto da referência, 300 mg); com epinefrina 595 mg (limitado a 500 mg). Portanto, duas seringas e meia de 10 mL a 2% = 500 mg: excede o limite usual sem vasoconstritor e atinge o máximo usual com epinefrina. Não assumir presença de vasoconstritor; confirmar frasco e dose cumulativa.</p>
+
+    <p><strong>Técnica:</strong> explicar e obter consentimento; analgesia sistêmica se necessário; limpar pele; preparar campo; usar agulha fina; infiltrar lentamente pela borda da ferida ou realizar bloqueio regional; aspirar antes de injetar e avançar em pequenos volumes. Esperar efeito e testar sensibilidade antes de iniciar.</p>
+    <p><strong>Onde aplicar:</strong> infiltração local subdérmica ao longo das bordas, preferencialmente a partir de pele íntegra para dentro; bloqueio de campo ao redor da lesão; bloqueios digitais na base do dedo (evitar injeção intravascular e respeitar anatomia). Feridas de face/couro cabeludo podem exigir bloqueios regionais para reduzir distorção dos tecidos.</p>
+
+    <h2>Fios e escolha orientativa</h2>
+    <ul>
+        <li><strong>Face:</strong> 5-0 ou 6-0 não absorvível (nylon/polipropileno), retirar precocemente conforme região.</li>
+        <li><strong>Couro cabeludo:</strong> 3-0 ou 4-0 nylon/grampos; gálea com absorvível 2-0 ou 3-0 quando necessário.</li>
+        <li><strong>Tronco/extremidades:</strong> 4-0 ou 3-0 conforme tensão/espessura.</li>
+        <li><strong>Mucosa:</strong> absorvível 4-0/5-0.</li>
+        <li><strong>Subcutâneo:</strong> absorvível 3-0/4-0; reduzir espaço morto e tensão.</li>
+    </ul>
+    <p>Calibre menor = fio mais fino. Seleção depende de tensão, localização, contaminação e experiência.</p>
+
+    <p><strong>Tipos de ponto:</strong> simples interrompido (versátil); Donati/colchoeiro vertical (eversão e tensão); colchoeiro horizontal (distribui tensão, risco de isquemia se apertado); intradérmico (feridas limpas, baixa tensão); ponto em X/hemostático (situações selecionadas). Fechar por planos quando há lesão profunda e tensão; não deixar espaço morto nem estrangular bordas.</p>
+    <p><strong>Cuidados:</strong> irrigação abundante, remover corpo estranho/tecido desvitalizado quando indicado, hemostasia, avaliar profilaxia antitetânica, mordeduras e antibiótico apenas quando indicado. Suspeita de lesão profunda, fratura exposta, ferida complexa de face/mão, déficit neurovascular, corpo estranho profundo ou necessidade de reparo especializado = encaminhar.</p>
+</div>
+
+<!-- ============ 9 ============ -->
+<div id="sec9" class="section">
+    <h1>9. ACESSO VENOSO CENTRAL (CVC)</h1>
+    <p><strong>Indicações comuns:</strong> infusão prolongada de vasoativos/soluções irritantes ou hiperosmolares; acesso periférico impossível/insuficiente; terapia renal substitutiva (cateter específico); monitorização selecionada; nutrição parenteral; acesso de alto fluxo conforme cateter e cenário. Não inserir apenas por rotina se acesso periférico adequado atende à necessidade.</p>
+    <p><strong>Contraindicações relativas:</strong> infecção/queimadura no sítio; trombose/estenose conhecida; anatomia distorcida; coagulopatia/trombocitopenia (ponderar risco e urgência); agitação sem condições de segurança. Não há contraindicação absoluta universal em emergência com risco de vida: escolher sítio/técnica que minimize risco e solicitar apoio experiente.</p>
+    <p><strong>Escolha do sítio:</strong> jugular interna guiada por ultrassom é frequentemente preferida; femoral pode ser rápida em emergência, compressível, mas maior risco de infecção/trombose em alguns contextos; subclávia/axilar pode reduzir infecção, mas aumenta risco de pneumotórax e é menos compressível. Considerar ventilação, coagulopatia, anatomia, dispositivos, infecção e experiência.</p>
+    <p><strong>Materiais:</strong> ultrassom com capa estéril e gel estéril; kit CVC apropriado; clorexidina alcoólica (se não contraindicada); gorro, máscara, avental e luvas estéreis; campo estéril amplo; anestésico local; seringas e SF para flush; bisturi; fio de sutura/dispositivo de fixação; curativo estéril; monitorização e material de reanimação.</p>
+
+    <div class="highlight" style="text-align:center; font-weight:700; letter-spacing:.02em;">
+        PREPARAR → POSICIONAR → ASSEPSIA → PUNCIONAR → GUIA → DILATAR → CATETERIZAR → CONFIRMAR → FIXAR
+    </div>
+
+    <h2>Passos — técnica de Seldinger</h2>
+    <ol>
+        <li>Confirmar indicação, consentimento quando possível, lado/sítio e checklist.</li>
+        <li>Monitorizar; posicionar (Trendelenburg se apropriado para jugular/subclávia e tolerado).</li>
+        <li>Ultrassom antes da punção: identificar veia, artéria, trombo e anatomia; manter visualização da agulha durante a punção.</li>
+        <li>Antissepsia, secagem completa, barreira estéril máxima e campo amplo.</li>
+        <li>Anestesiar pele/tecido, aspirando antes de injetar.</li>
+        <li>Puncionar sob visão ultrassonográfica; confirmar retorno venoso e posição intravascular. Cor do sangue/pulsatilidade não são confiáveis isoladamente em choque/hipoxemia.</li>
+        <li>Passar fio-guia sem força; monitorar ECG se arritmia. Se resistência, parar e reavaliar.</li>
+        <li>Confirmar fio dentro da veia por ultrassom antes de dilatar. Nunca dilatar sem certeza de fio intravascular.</li>
+        <li>Pequena incisão cutânea; passar dilatador apenas o necessário; retirar dilatador mantendo controle do fio.</li>
+        <li>Avançar cateter sobre o fio; retirar fio-guia e confirmar que saiu inteiro; aspirar e lavar todos os lúmens.</li>
+        <li>Fixar, curativo estéril e documentar número de tentativas, sítio, tipo e intercorrências.</li>
+    </ol>
+
+    <p><strong>Confirmação:</strong> antes de usar para infusão central, confirmar posição da ponta e excluir complicações conforme sítio e protocolo (radiografia, ECG intracavitário ou ultrassom/eco com protocolo validado). Ponta ideal geralmente na junção cavoatrial/terço inferior da VCS para cateteres superiores. Cateter femoral não requer RX torácico. Se suspeita de punção/dilatação arterial com dilatador/cateter de grande calibre: não retirar às cegas; deixar no lugar e chamar cirurgia vascular/intervencionista.</p>
+    <p><strong>Complicações:</strong> punção arterial, hematoma, pneumotórax/hemotórax, arritmia, embolia gasosa, mau posicionamento, lesão nervosa, trombose, infecção e perda do fio-guia. Prevenir com ultrassom, barreira máxima, técnica asséptica, número mínimo de tentativas e confirmação antes do uso.</p>
+</div>
+
+<!-- ============ 10 ============ -->
+<div id="sec10" class="section">
+    <h1>10. CHECKLISTS DE CABECEIRA</h1>
+
+    <h2>Antes de qualquer infusão de alto risco — 10 checagens</h2>
+    <ol>
+        <li>Paciente e indicação corretos.</li>
+        <li>Peso usado no cálculo correto.</li>
+        <li>Fármaco e apresentação conferidos.</li>
+        <li>Dose e unidade (mg vs mcg) conferidas.</li>
+        <li>Diluição e concentração final calculadas.</li>
+        <li>Compatibilidade e equipo/linha verificados.</li>
+        <li>Acesso adequado e sítio inspecionado.</li>
+        <li>Bomba programada e velocidade independente conferida.</li>
+        <li>Monitorização e metas definidas.</li>
+        <li>Resposta, eventos adversos e plano de desmame documentados.</li>
+    </ol>
+
+    <p><strong>Antes de suturar:</strong> mecanismo e horário; alergias/anticoagulantes; exame neurovascular; corpo estranho/fratura/lesão profunda; anestésico e dose cumulativa; irrigação; hemostasia; fio/plano; tétano; orientações e retorno.</p>
+    <p><strong>Antes de CVC:</strong> indicação; sítio/lado; ultrassom e anatomia; consentimento quando possível; coagulopatia; barreira máxima: checklist; fio-guia confirmado antes de dilatar; ponta/complicações confirmadas antes de uso; documentação.</p>
+    <p><strong>Antes de trombólise:</strong> último visto bem; déficit incapacitante/NIHSS; TC sem hemorragia; glicemia; PA; anticoagulantes e coagulação quando indicada; critérios de inclusão/exclusão completos; peso/dose dupla checados; horário de bolus/início; plano de monitorização e manejo de sangramento.</p>
+
+    <h2 style="margin-top: 40px; border-top: 1px solid var(--border-color); padding-top: 22px;">REFERÊNCIAS PRINCIPAIS</h2>
+    <ol class="refs">
+        <li>PRABHAKARAN, S. et al. <em>2026 Guideline for the Early Management of Patients With Acute Ischemic Stroke.</em> Stroke, 2026. DOI: 10.1161/STR.0000000000000513. <a href="https://www.ahajournals.org/doi/10.1161/STR.0000000000000513" target="_blank" rel="noopener">ahajournals.org/doi/10.1161/STR.0000000000000513</a></li>
+        <li>AMERICAN HEART ASSOCIATION. <em>2025 Guidelines for CPR and ECC: Adult Advanced Life Support.</em> Circulation, 2025. <a href="https://www.ahajournals.org/doi/10.1161/CIR.0000000000001376" target="_blank" rel="noopener">ahajournals.org/doi/10.1161/CIR.0000000000001376</a></li>
+        <li>AMERICAN HEART ASSOCIATION. <em>Adult resuscitation algorithms.</em> <a href="https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/algorithms/" target="_blank" rel="noopener">cpr.heart.org/.../algorithms</a></li>
+        <li>EVANS, L. et al. <em>Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2021.</em> Intensive Care Medicine, 2021. <a href="https://pmc.ncbi.nlm.nih.gov/articles/8486643/" target="_blank" rel="noopener">pmc.ncbi.nlm.nih.gov/articles/8486643</a></li>
+        <li>SOCIETY OF CRITICAL CARE MEDICINE. <em>A Focused Update to SCCM PADIS Guidelines for Adult Patients.</em> 2025. <a href="https://www.sccm.org/clinical-resources/guidelines/guidelines-focused-update-padis-guideline" target="_blank" rel="noopener">sccm.org/.../guidelines-focused-update-padis-guideline</a></li>
+        <li>SOCIETY OF CRITICAL CARE MEDICINE. <em>Guidelines for Rapid Sequence Intubation in the Critically Ill Adult Patient.</em> <a href="https://www.sccm.org/clinical-resources/guidelines/guidelines/guidelines-rapid-sequence-intubation" target="_blank" rel="noopener">sccm.org/.../guidelines-rapid-sequence-intubation</a></li>
+        <li>SOCIEDADE BRASILEIRA DE CARDIOLOGIA. <em>Diretriz Brasileira de Hipertensão Arterial — 2025.</em> <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC13671149/" target="_blank" rel="noopener">pmc.ncbi.nlm.nih.gov/articles/PMC13671149</a></li>
+        <li>UK KIDNEY ASSOCIATION. <em>Clinical Practice Guideline: Treatment of Acute Hyperkalaemia in Adults.</em> Atualização 2026. <a href="https://www.ukkidney.org/health-professionals/guidelines/treatment-acute-hyperkalaemia-adults-0" target="_blank" rel="noopener">ukkidney.org/.../treatment-acute-hyperkalaemia-adults-0</a></li>
+        <li>BROWN HEALTH. <em>Laceration Guideline.</em> Revisão 2026. <a href="https://www.brownhealth.org/sites/default/files/2026-03/Laceration-Clinical-Pathw.pdf" target="_blank" rel="noopener">brownhealth.org/.../Laceration-Clinical-Pathw.pdf</a></li>
+        <li>NSW CLINICAL EXCELLENCE COMMISSION. <em>Sodium nitroprusside: adult continuous infusion concentrations.</em> Setembro 2026. <a href="https://cec.health.nsw.gov.au/therapeutics-safety/continuous-infusions/adult/sodium-nitroprusside" target="_blank" rel="noopener">cec.health.nsw.gov.au/.../sodium-nitroprusside</a></li>
+    </ol>
+
+    <!-- Bloco de autoria -->
+    <div class="author-box">
+        <p><strong>Autor:</strong> Fernando Luis Godoy</p>
+        <p><strong>Obra:</strong> Manual de Bolso — Emergência e UTI (Adultos)</p>
+        <p><strong>Versão:</strong> 1.0 • 06 de novembro de 2026</p>
+        <p>© 2026 Fernando Luis Godoy. Uso educacional. Reprodução total ou parcial permitida com citação da fonte.</p>
+    </div>
+
+    <p style="font-size: .85rem; color: var(--text-muted); margin-top: 22px; font-style: italic; border-top: 1px solid var(--border-soft); padding-top: 16px;">
+        <strong>Limitações desta versão:</strong> material de referência inicial. Não contém todas as drogas de emergência/UTI, tabelas completas de compatibilidade, ajustes farmacocinéticos, todas as contraindicações formais, nem protocolos locais de AVC/SUS. Doses variam por apresentação, indicação e instituição. Atualizar com farmácia clínica, protocolos hospitalares e diretrizes completas antes de uso assistencial.
+    </p>
+</div>
+
+</main>
+
+<button class="to-top" id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Voltar ao topo">↑</button>
+
+<script>
+    function toggleMenu() {
+        document.getElementById('sidebar').classList.toggle('active');
+        document.querySelector('.backdrop').classList.toggle('active');
+    }
+    function closeMenu() {
+        if (window.innerWidth <= 992) {
+            document.getElementById('sidebar').classList.remove('active');
+            document.querySelector('.backdrop').classList.remove('active');
+        }
+    }
+
+    const sections = document.querySelectorAll('.section');
+    const navLinks = document.querySelectorAll('.sidebar a');
+    const toTop = document.getElementById('toTop');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(s => {
+            if (scrollY >= s.offsetTop - 160) current = s.id;
+        });
+        navLinks.forEach(l => {
+            l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+        });
+        toTop.classList.toggle('visible', scrollY > 600);
+    });
+</script>
+</body>
+</html>
