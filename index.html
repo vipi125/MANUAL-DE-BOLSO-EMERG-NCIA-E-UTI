@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="Fernando Luis Godoy">
-<meta name="description" content="Manual de bolso de emergência e UTI para adultos — doses, preparo, administração, acesso vascular, AVC e procedimentos. Versão 1.0, 06/11/2026.">
-<title>Manual de Bolso - Emergência e UTI | Fernando Luis Godoy</title>
+<meta name="description" content="Manual de bolso de emergência e UTI para adultos — doses, preparo, administração, acesso vascular, AVC e procedimentos. Versão 1.1, 06/11/2026.">
+<title>Manual de Bolso - Emergência e UTI | Fernando Luis Godoy | v1.1</title>
 <style>
     :root {
         --primary-blue: #0b3d91;
@@ -249,6 +249,23 @@
     .refs a { color: var(--accent-blue); text-decoration: none; }
     .refs a:hover { text-decoration: underline; }
 
+
+    /* ---------- Added electrolyte module + calculators (v1.1) ---------- */
+    .electrolyte-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; margin:16px 0; }
+    .calc-card { border:1px solid var(--border-color); border-radius:8px; padding:16px; background:#fff; min-width:0; }
+    .calc-card h2 { margin-top:0; }
+    .calc-fields { display:grid; grid-template-columns:repeat(auto-fit,minmax(145px,1fr)); gap:10px; margin:12px 0; }
+    .calc-field label { display:block; font-size:.82rem; font-weight:650; margin-bottom:4px; color:var(--text-muted); }
+    .calc-field input,.calc-field select { width:100%; padding:9px 10px; border:1px solid #aab4be; border-radius:5px; font:inherit; font-size:.95rem; background:#fff; color:var(--text-dark); }
+    .calc-button { border:0; border-radius:5px; background:var(--primary-blue); color:#fff; padding:10px 15px; font:inherit; font-weight:650; cursor:pointer; }
+    .calc-result { background:#eef6fc; border-left:4px solid var(--accent-blue); padding:12px 14px; margin-top:12px; border-radius:0 5px 5px 0; min-height:46px; font-size:.92rem; }
+    .calc-result.warning { background:#fff4e5; border-left-color:#c77700; }
+    .calc-result.danger { background:var(--alert-bg); border-left-color:var(--alert-red); }
+    .calc-note { color:var(--text-muted); font-size:.82rem; }
+    .tagline { display:inline-block; background:var(--light-blue); color:var(--primary-blue); padding:3px 8px; border-radius:20px; font-size:.76rem; font-weight:700; margin:2px 4px 5px 0; }
+    .formula { font-family:ui-monospace,SFMono-Regular,Consolas,monospace; background:#f6f8fa; padding:8px 10px; border-radius:4px; overflow-wrap:anywhere; }
+    @media print { .calc-card { break-inside:avoid; } .calc-button { display:none; } }
+
     /* ---------- Responsive ---------- */
     @media (max-width: 992px) {
         .sidebar { transform: translateX(-100%); }
@@ -329,6 +346,7 @@
     <a href="#sec8" onclick="closeMenu()">8. Anestesia Local e Sutura</a>
     <a href="#sec9" onclick="closeMenu()">9. Acesso Venoso Central</a>
     <a href="#sec10" onclick="closeMenu()">10. Checklists e Referências</a>
+    <a href="#sec11" onclick="closeMenu()">11. Correção de Eletrólitos + Calculadoras</a>
 
     <div class="sidebar-footer">
         <strong>Autor</strong><br>
@@ -800,6 +818,153 @@
     </p>
 </div>
 
+
+<!-- ============ 11 — ADIÇÃO v1.1; TODO O CONTEÚDO ORIGINAL FOI PRESERVADO ============ -->
+<div id="sec11" class="section">
+    <h1>11. CORREÇÃO DE ELETRÓLITOS — ADULTO</h1>
+    <div class="alert">
+        <span class="alert-title">Módulo de alto risco — não é prescrição automática</span>
+        <p>As calculadoras abaixo fazem contas de concentração, volume e estimativas farmacológicas. Elas <strong>não determinam sozinhas a dose clínica</strong>. Confirmar resultado laboratorial, sintomas, ECG, função renal, diurese, volemia, medicamentos, perdas em curso e protocolo institucional. Em alterações graves/sintomáticas, envolver médico sênior/UTI/nefrologia conforme contexto.</p>
+        <p><strong>Não existe fórmula segura que converta diretamente a diferença do potássio sérico em mEq de KCl a administrar.</strong> O K sérico não representa o estoque corporal total; a dose deve ser fracionada, prescrita e reavaliada por exames seriados.</p>
+    </div>
+
+    <h2>11.1 Avaliação antes de repor</h2>
+    <ul>
+        <li>Confirmar resultado e unidade; excluir hemólise/pseudohiperpotassemia quando plausível, sem atrasar tratamento se houver instabilidade ou ECG compatível.</li>
+        <li>Verificar ECG, sintomas, função renal/eTFG, diurese, magnésio, cálcio, fósforo, equilíbrio ácido-base e glicemia.</li>
+        <li>Revisar perdas gastrointestinais/renais, diuréticos, IECA/BRA, antagonistas de aldosterona, AINE, insulina, beta-agonistas, laxantes e reposições já em curso.</li>
+        <li>Preferir via oral/enteral quando paciente estável, absorção preservada e sem necessidade de correção imediata. IV é para grave/sintomático, intolerância/íleo/NPO, má absorção ou necessidade urgente.</li>
+        <li>Na insuficiência renal, oligúria/anúria ou diálise, reduzir/individualizar reposição e discutir com nefrologia; risco de sobrecorreção.</li>
+    </ul>
+
+    <h2>11.2 Potássio (K⁺) — hipocalemia</h2>
+    <p><span class="tagline">Normal aproximado: 3,5–5,0 mEq/L</span><span class="tagline">1 mmol K⁺ = 1 mEq K⁺</span></p>
+    <div class="table-responsive"><table><thead><tr><th>K sérico</th><th>Classificação orientativa</th><th>Conduta geral</th></tr></thead><tbody>
+        <tr><td>3,0–3,4 mEq/L</td><td>Leve</td><td>Geralmente oral se tolerada; referência SPS: 24 mmol (24 mEq) VO até 2–3 vezes/dia, fracionado e ajustado à função renal/laboratório; investigar causa, Mg e perdas.</td></tr>
+        <tr><td>2,5–2,9 mEq/L</td><td>Moderada</td><td>Oral preferida se estável; referência SPS: 24–36 mmol (mEq) VO até 3–4 vezes/dia, conforme reavaliação. IV se não tolera via enteral ou se urgência/sintomas/ECG.</td></tr>
+        <tr><td>&lt;2,5 mEq/L, sintomas importantes ou alteração ECG</td><td>Grave</td><td>Reposição IV hospitalar, monitorização cardíaca conforme gravidade e reavaliações frequentes.</td></tr>
+    </tbody></table></div>
+    <p><strong>Meta:</strong> corrigir para pelo menos ≥3,5 mEq/L e tratar a causa. Em cardiopatia isquêmica, arritmia, uso de digoxina ou risco arrítmico, frequentemente se busca K ≥4,0 mEq/L, individualizando para evitar hipercalemia. A meta não deve ser usada como cálculo automático de dose.</p>
+
+    <h2>11.3 KCl IV — acesso, concentração, velocidade e preparo</h2>
+    <div class="table-responsive"><table><thead><tr><th>Via</th><th>Concentração / velocidade de referência</th><th>Requisitos e observações</th></tr></thead><tbody>
+        <tr><td><strong>Periférica</strong></td><td>Até 40 mEq/L; velocidade usual não superior a 10 mEq/h.</td><td>Veia calibrosa, bomba de infusão, solução diluída e preferencialmente pronta; observar dor/flebite/extravasamento. Se a concentração excede o limite, escolher outro preparo/acesso conforme protocolo.</td></tr>
+        <tr><td><strong>Central</strong></td><td>Concentrações maiores podem ser utilizadas em hipocalemia grave, com bomba e protocolo de UTI/farmácia. Não há concentração única universal.</td><td>Cateter central com ponta confirmada; monitorização ECG contínua para reposição rápida/concentrada. Velocidades acima de 10 mEq/h exigem protocolo específico; >20 mEq/h requer monitorização cardíaca contínua e ambiente de terapia intensiva.</td></tr>
+        <tr><td><strong>Oral/enteral</strong></td><td>Preferível em paciente estável e com TGI funcionante.</td><td>Usar apresentação oral padronizada; administrar com alimento/água conforme produto. Evitar em íleo, vômitos persistentes ou incapacidade de deglutir.</td></tr>
+    </tbody></table></div>
+    <div class="alert"><span class="alert-title">Nunca fazer</span><p><strong>KCl concentrado nunca deve ser administrado em bolus/IV push.</strong> Nunca adicionar concentrado diretamente ao acesso sem diluição e homogeneização. Preferir bolsas pré-misturadas. Não usar solução glicosada como diluente de rotina para reposição de K, pois a glicose/insulina pode reduzir ainda mais o K sérico. Conferir compatibilidade, rotulagem, bomba e dupla checagem.</p></div>
+    <p><strong>Apresentações brasileiras variam:</strong> KCl 19,1% costuma corresponder a aproximadamente 2,56 mEq/mL (ampola 10 mL ≈25,6 mEq); KCl 10% ≈1,34 mEq/mL (ampola 10 mL ≈13,4 mEq). <strong>Não confiar apenas no percentual:</strong> confirmar no rótulo a concentração em mEq/mL e o volume da ampola. O calculador usa o valor inserido pelo usuário.</p>
+    <p><strong>Exemplo matemático, não prescrição:</strong> 20 mEq em volume final de 500 mL = 40 mEq/L. Se a ampola rotulada contém 2,56 mEq/mL, 20 mEq correspondem a 7,8 mL (não necessariamente uma ampola inteira). Completar até volume final prescrito, retirar volume equivalente do diluente quando aplicável, homogeneizar e rotular. A dose e o tempo dependem do paciente e do protocolo.</p>
+    <p><strong>Monitorização:</strong> K sérico após cada etapa de reposição conforme gravidade/protocolo; ECG em hipocalemia grave, sintomas, arritmia ou infusão concentrada/rápida; Mg e função renal; glicemia se houver outras intervenções que a alterem. Corrigir hipomagnesemia associada, pois pode tornar a hipocalemia refratária.</p>
+
+    <div class="calc-card">
+        <h2>Calculadora 1 — KCl: mEq, mL de concentrado, ampolas e diluição</h2>
+        <p class="calc-note">Insira a dose de KCl já definida pelo prescritor/protocolo. A ferramenta calcula apenas o preparo matemático e sinaliza limites de concentração/velocidade.</p>
+        <div class="calc-fields">
+            <div class="calc-field"><label for="kNow">K atual (mEq/L)</label><input id="kNow" type="number" step="0.1" min="1" max="8" value="2.8"></div>
+            <div class="calc-field"><label for="kGoal">Meta escolhida (mEq/L)</label><input id="kGoal" type="number" step="0.1" min="3.5" max="5.5" value="4.0"></div>
+            <div class="calc-field"><label for="kDose">Dose prescrita nesta etapa (mEq)</label><input id="kDose" type="number" step="1" min="1" max="200" value="20"></div>
+            <div class="calc-field"><label for="kStrength">Concentração do rótulo (mEq/mL)</label><input id="kStrength" type="number" step="0.01" min="0.01" value="2.56"></div>
+            <div class="calc-field"><label for="kAmp">Volume da ampola (mL)</label><input id="kAmp" type="number" step="0.1" min="0.1" value="10"></div>
+            <div class="calc-field"><label for="kDiluent">Volume final da bolsa (mL)</label><input id="kDiluent" type="number" step="10" min="50" value="500"></div>
+            <div class="calc-field"><label for="kRate">Velocidade prescrita (mEq/h)</label><input id="kRate" type="number" step="1" min="1" max="40" value="10"></div>
+            <div class="calc-field"><label for="kAccess">Acesso</label><select id="kAccess"><option value="peripheral">Periférico</option><option value="central">Central</option></select></div>
+        </div>
+        <button class="calc-button" type="button" onclick="calcPotassium()">Calcular preparo</button>
+        <div id="kResult" class="calc-result" aria-live="polite">Preencha os dados e calcule. A meta menos o K atual não equivale ao déficit corporal em mEq.</div>
+    </div>
+
+    <h2>11.4 Potássio — hipercalemia</h2>
+    <p><strong>Urgência:</strong> K ≥6,0 mEq/L requer ECG imediato e avaliação urgente; K ≥6,5 mEq/L, alterações ECG ou instabilidade = emergência. Tratar ECG/instabilidade sem aguardar confirmação se quadro compatível. Considerar pseudohiperpotassemia se resultado inesperado e paciente estável.</p>
+    <ol>
+        <li><strong>Proteger o miocárdio se ECG alterado:</strong> cálcio IV conforme protocolo (p.ex. gluconato de cálcio 10% 30 mL IV em 10 min; cloreto de cálcio 10% 10 mL IV em 5 min em cenários de maior gravidade/ressuscitação, preferencialmente central). Cálcio não reduz K; repetir se alterações persistirem conforme ECG/protocolo.</li>
+        <li><strong>Deslocar K para dentro da célula:</strong> insulina regular IV + glicose conforme protocolo (esquemas comuns usam 10 U + 25 g glicose); salbutamol nebulizado 10–20 mg como adjuvante. Monitorar glicemia seriada por risco de hipoglicemia tardia.</li>
+        <li><strong>Bicarbonato:</strong> não usar rotineiramente; considerar em acidose metabólica importante ou contexto específico de PCR conforme protocolo.</li>
+        <li><strong>Remover K:</strong> diurético se apropriado e função renal/volemia permitirem; quelantes conforme disponibilidade/indicação; diálise urgente em hipercalemia grave/refratária, insuficiência renal ou alterações persistentes.</li>
+    </ol>
+    <p>ECG contínuo em casos graves; repetir K após tratamento (frequentemente em 1 h e depois 4–6 h conforme protocolo), vigiar rebote e glicemia. Suspender fontes/medicamentos causais quando indicado.</p>
+
+    <h2>11.5 Sódio — hiponatremia</h2>
+    <p>Confirmar hipotonicidade (osmolaridade sérica), avaliar volemia, glicemia, osmolaridade/Na urinários e duração (&lt;48 h aguda; ≥48 h ou desconhecida = tratar como crônica para risco de desmielinização). Tratar a causa: hipovolemia, SIADH, insuficiência cardíaca/cirrose, adrenal/tiroide, fármacos etc.</p>
+    <p><strong>Hiponatremia com sintomas neurológicos graves</strong> (convulsão, coma, deterioração importante): NaCl 3% em bolus conforme protocolo local (referências utilizam, por exemplo, 100 mL em 10 min ou 150 mL em 20 min; algumas usam 2–4 mL/kg), reavaliando sintomas e Na antes de repetir. Objetivo inicial usual: elevação de aproximadamente 4–6 mEq/L, não normalização do sódio.</p>
+    <p><strong>Limites de segurança:</strong> evitar correção &gt;10 mEq/L nas primeiras 24 h e &gt;8 mEq/L por 24 h subsequentes; em alto risco de desmielinização osmótica (Na muito baixo, alcoolismo, desnutrição, hepatopatia avançada, hipocalemia), adotar limite mais conservador, em geral ≤8 mEq/L/24 h. Monitorar Na a cada 2–4 h durante terapia ativa/hipertônica e acompanhar diurese; aquarese súbita pode acelerar correção. Considerar desmopressina e água livre para conter/reverter sobrecorreção sob orientação especializada.</p>
+    <p><strong>Acesso:</strong> NaCl 3% pode ser administrado por veia periférica em bolus curto em emergência, com acesso adequado e vigilância do sítio; acesso central é preferível/considerado para infusão contínua prolongada ou soluções muito concentradas, conforme protocolo. Não atrasar bolus emergencial por aguardar CVC.</p>
+
+    <div class="calc-card">
+        <h2>Calculadora 2 — Sódio: correção pela glicose + estimativa de água livre</h2>
+        <div class="calc-fields">
+            <div class="calc-field"><label for="naMeasured">Na medido (mEq/L)</label><input id="naMeasured" type="number" step="0.1" value="128"></div>
+            <div class="calc-field"><label for="glucose">Glicemia (mg/dL)</label><input id="glucose" type="number" step="1" value="100"></div>
+            <div class="calc-field"><label for="naWeight">Peso (kg)</label><input id="naWeight" type="number" step="0.1" value="70"></div>
+            <div class="calc-field"><label for="naProfile">Estimativa de água corporal total</label><select id="naProfile"><option value="0.6">Homem adulto (0,60)</option><option value="0.5">Mulher adulta / homem idoso (0,50)</option><option value="0.45">Mulher idosa (0,45)</option><option value="0.4">Idoso frágil (0,40; estimativa)</option></select></div>
+            <div class="calc-field"><label for="naTarget">Na alvo para cálculo (mEq/L)</label><input id="naTarget" type="number" step="0.1" value="140"></div>
+            <div class="calc-field"><label for="naCorrectionFactor">Fator glicêmico (mEq/100 mg/dL)</label><select id="naCorrectionFactor"><option value="1.6">1,6 (padrão)</option><option value="2.4">2,4 (hiperglicemia acentuada / estimativa)</option></select></div>
+        </div>
+        <button class="calc-button" type="button" onclick="calcSodium()">Calcular estimativas</button>
+        <div id="naResult" class="calc-result" aria-live="polite">Resultado: corrigir Na pela glicemia e estimar déficit de água livre se hipernatremia.</div>
+        <p class="calc-note">A fórmula de déficit de água livre é uma estimativa inicial; não calcula automaticamente taxa de infusão. Acrescentar perdas em curso e manutenção, escolher via oral/enteral quando possível e monitorar Na seriado. Não utilizar o resultado como prescrição direta.</p>
+    </div>
+    <p><strong>NaCl 3%:</strong> contém aproximadamente 513 mEq/L de sódio (51,3 mEq em 100 mL). NaCl 0,9% contém aproximadamente 154 mEq/L. Conferir a solução comercial; não preparar solução hipertônica à beira-leito sem protocolo institucional validado.</p>
+
+    <h2>11.6 Sódio — hipernatremia</h2>
+    <p>Na &gt;145 mEq/L: avaliar água livre, perdas, diurese, osmolaridade urinária, glicose, função renal e estado volêmico. Se choque/hipoperfusão, restaurar circulação primeiro com cristaloide isotônico; depois corrigir déficit de água livre. Preferir água enteral quando possível; IV pode usar SG 5% ou solução hipotônica selecionada conforme estado volêmico.</p>
+    <p>Na hipernatremia crônica ou de duração desconhecida, usar abordagem gradual; alvo frequentemente ≤10 mEq/L em 24 h como referência conservadora, com reavaliação seriada. Hipernatremia aguda por carga de sódio pode exigir estratégia diferente e discussão especializada. Não atrasar tratamento da causa e das perdas em curso.</p>
+
+    <h2>11.7 Magnésio (Mg²⁺)</h2>
+    <p>Referência aproximada: 0,7–1,0 mmol/L (≈1,7–2,4 mg/dL; verificar unidade do laboratório). Hipomagnesemia grave &lt;0,5 mmol/L, convulsão, tetania ou arritmia requer avaliação e reposição IV hospitalar. Corrigir Mg quando hipocalemia é refratária ou coexistem hipocalcemia/arrítmias.</p>
+    <ul>
+        <li><strong>Reposição IV:</strong> doses iniciais descritas em protocolos variam; referência SPS: 1–5 g de MgSO₄ conforme nível/sintomas; 5 g IV como dose inicial em hipomagnesemia grave/sintomática. Infusão usual 1–2 g/h, com dose e duração ajustadas por controle laboratorial.</li>
+        <li><strong>Apresentação:</strong> MgSO₄ 10% = 0,1 g/mL; 20% = 0,2 g/mL; 50% = 0,5 g/mL. 1 g MgSO₄ ≈4 mmol Mg. Ampola de 10 mL a 50% contém 5 g (≈20 mmol).</li>
+        <li><strong>Diluição/acesso:</strong> MgSO₄ 50% deve sempre ser diluído. Para periférico, concentração final usual não superior a 5–10% (0,05–0,1 g/mL); central até 20% em protocolos específicos. Acesso periférico adequado é possível para solução diluída; CVC não é obrigatório apenas por ser magnésio.</li>
+        <li><strong>Riscos:</strong> hipotensão, rubor, bradicardia, depressão respiratória e hipermagnesemia. Reduzir dose/velocidade e discutir com especialista em DRC avançada, IRA ou diálise. Monitorar PA, FR, reflexos quando pertinente, Mg, Ca, K, função renal e ECG se sintomático.</li>
+    </ul>
+    <div class="calc-card">
+        <h2>Calculadora 3 — MgSO₄: gramas para mL e ampolas</h2>
+        <div class="calc-fields">
+            <div class="calc-field"><label for="mgDose">Dose prescrita (g de MgSO₄)</label><input id="mgDose" type="number" min="0.5" max="10" step="0.5" value="2"></div>
+            <div class="calc-field"><label for="mgStrength">Concentração do produto (%)</label><select id="mgStrength"><option value="0.1">10%</option><option value="0.2">20%</option><option value="0.5" selected>50%</option></select></div>
+            <div class="calc-field"><label for="mgAmp">Volume da ampola (mL)</label><input id="mgAmp" type="number" min="1" step="1" value="10"></div>
+            <div class="calc-field"><label for="mgFinal">Concentração final desejada (g/mL)</label><select id="mgFinal"><option value="0.05">0,05 (5%)</option><option value="0.1" selected>0,10 (10%)</option><option value="0.2">0,20 (20%, somente protocolo central)</option></select></div>
+        </div>
+        <button class="calc-button" type="button" onclick="calcMagnesium()">Calcular preparo</button>
+        <div id="mgResult" class="calc-result" aria-live="polite">Insira a dose já prescrita e confirme a concentração no rótulo.</div>
+    </div>
+
+    <h2>11.8 Cálcio (Ca²⁺)</h2>
+    <p>Preferir cálcio ionizado em paciente crítico; cálcio total deve ser interpretado com albumina e contexto. Hipocalcemia grave/sintomática (tetania, convulsão, laringoespasmo, QT prolongado/arrítmia) requer tratamento IV urgente e investigação da causa (Mg, fósforo, PTH, vitamina D, transfusão citratada, pancreatite, rabdomiólise).</p>
+    <ul>
+        <li><strong>Gluconato de cálcio 10%:</strong> 10–20 mL IV diluídos em 50–100 mL de SG 5% ou SF 0,9%, em cerca de 10 min, com ECG; repetir conforme sintomas/nível e protocolo. 10 mL de gluconato 10% ≈1 g de sal e cerca de 2,2 mmol (4,4 mEq) de cálcio; confirmar bula local.</li>
+        <li><strong>Acesso:</strong> gluconato de cálcio é menos irritante e pode ser administrado em veia periférica calibrosa com vigilância do sítio. Cloreto de cálcio 10% é mais irritante; preferir via central, especialmente fora de parada/ressuscitação. Não misturar na mesma linha com bicarbonato ou fosfato (precipitação).</li>
+        <li><strong>Monitorização:</strong> ECG, PA, cálcio ionizado/total seriado e sítio de infusão. Extravasamento pode causar necrose/calcificação. Cautela em uso de digoxina e doença renal; tratar hipomagnesemia concomitante.</li>
+    </ul>
+
+    <h2>11.9 Fósforo (PO₄³⁻)</h2>
+    <p>Hipofosfatemia: leve 0,6–0,69 mmol/L geralmente sem reposição IV; moderada 0,3–0,59 mmol/L costuma permitir reposição oral se possível; grave &lt;0,3 mmol/L ou sintomas (fraqueza respiratória, rabdomiólise, convulsão, arritmia) pode requerer reposição IV em ambiente monitorado.</p>
+    <p><strong>Exemplo de protocolo publicado (não universal):</strong> glicerofosfato de sódio 21,6%: 20 mmol (20 mL) em 500 mL de SF 0,9% ou SG 5% em 12 h para alguns cenários moderados/risco renal; 40 mmol (40 mL) em 500 mL em 12 h para hipofosfatemia grave com função renal normal, conforme protocolo local. Esta formulação é específica e pode ser off-label; não extrapolar para fosfato de potássio ou outro produto.</p>
+    <p>Monitorar fósforo, cálcio, potássio, magnésio e função renal a cada 12–24 h durante reposição IV. Riscos: hipocalcemia, hiperfosfatemia, hipernatremia, hipotensão e precipitação/calcificação. Ajustar dose em disfunção renal. Conferir exatamente o conteúdo de mmol de fósforo e de sódio/potássio por mL do produto disponível.</p>
+
+    <h2>11.10 Calculadoras — como interpretar</h2>
+    <ul>
+        <li><strong>Potássio:</strong> calculadora converte dose prescrita em mEq para volume de concentrado e ampolas; calcula concentração final e volume mínimo para limite periférico. Não estima déficit corporal.</li>
+        <li><strong>Sódio:</strong> corrige Na para hiperglicemia e estima déficit de água livre na hipernatremia. Não substitui cálculo de velocidade/monitorização nem plano de fluidos.</li>
+        <li><strong>Magnésio:</strong> converte gramas prescritos em mL e ampolas e estima diluente para concentração final escolhida.</li>
+        <li><strong>Não automatizar:</strong> dose de cálcio e fosfato é dependente da indicação, produto, função renal e monitorização; manter como tabela/protocolo e não sugerir uma “dose total” a partir de um único exame.</li>
+    </ul>
+
+    <h2>11.11 Referências específicas do módulo</h2>
+    <ol class="refs">
+        <li>NHS SPECIALIST PHARMACY SERVICE. <em>Treating acute hypokalaemia in adults.</em> 14 Aug. 2024. <a href="https://sps.nhs.uk/articles/hypokalaemia/" target="_blank" rel="noopener">https://sps.nhs.uk/articles/hypokalaemia/</a></li>
+        <li>UK KIDNEY ASSOCIATION. <em>Clinical Practice Guideline: Treatment of Acute Hyperkalaemia in Adults.</em> Atualização publicada no site em 2026. <a href="https://www.ukkidney.org/health-professionals/guidelines/treatment-acute-hyperkalaemia-adults-0" target="_blank" rel="noopener">https://www.ukkidney.org/health-professionals/guidelines/treatment-acute-hyperkalaemia-adults-0</a></li>
+        <li>SPASOVSKI, G. et al. <em>Hyponatraemia—treatment standard 2024.</em> Nephrology Dialysis Transplantation, 2024. DOI: 10.1093/ndt/gfae162. <a href="https://doi.org/10.1093/ndt/gfae162" target="_blank" rel="noopener">https://doi.org/10.1093/ndt/gfae162</a></li>
+        <li>EUROPEAN SOCIETY OF ENDOCRINOLOGY et al. <em>Clinical practice guideline on diagnosis and treatment of hyponatraemia.</em> <a href="https://academic.oup.com/ejendo/article/170/3/G1/6668028" target="_blank" rel="noopener">https://academic.oup.com/ejendo/article/170/3/G1/6668028</a></li>
+        <li>AMERICAN FAMILY PHYSICIAN. <em>Diagnosis and Management of Sodium Disorders: Hyponatremia and Hypernatremia.</em> 2023. <a href="https://www.aafp.org/afp/2023/1100/sodium-disorders-hyponatremia-hypernatremia" target="_blank" rel="noopener">https://www.aafp.org/afp/2023/1100/sodium-disorders-hyponatremia-hypernatremia</a></li>
+        <li>NHS SPECIALIST PHARMACY SERVICE. <em>Treating acute hypomagnesaemia in adults.</em> 19 Dec. 2024. <a href="https://sps.nhs.uk/articles/treating-acute-hypomagnesaemia-in-adults/" target="_blank" rel="noopener">https://sps.nhs.uk/articles/treating-acute-hypomagnesaemia-in-adults/</a></li>
+        <li>TURNER, J. et al. <em>Society for Endocrinology Endocrine Emergency Guidance: Emergency management of acute hypocalcaemia in adult patients.</em> Endocrine Connections, 2016. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5314808/" target="_blank" rel="noopener">https://pmc.ncbi.nlm.nih.gov/articles/PMC5314808/</a></li>
+        <li>NHS AYRSHIRE & ARRAN. <em>Management of hypophosphataemia.</em> <a href="https://aaamedicines.org.uk/guidelines/electrolyte-disturbances/management-of-hypophosphataemia/" target="_blank" rel="noopener">https://aaamedicines.org.uk/guidelines/electrolyte-disturbances/management-of-hypophosphataemia/</a></li>
+    </ol>
+    <div class="disclaimer"><strong>Nota de versão:</strong> este módulo foi acrescentado à versão original sem remover seções ou conteúdo preexistente. As referências internacionais orientam a estrutura, mas concentração, apresentação de ampolas e limites de infusão precisam ser validados com a farmácia e o protocolo do hospital brasileiro.</div>
+</div>
+
 </main>
 
 <button class="to-top" id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Voltar ao topo">↑</button>
@@ -830,6 +995,66 @@
         });
         toTop.classList.toggle('visible', scrollY > 600);
     });
+
+
+    /* ---------- Electrolyte calculators added in v1.1 ---------- */
+    function num(id) { const el=document.getElementById(id); return el ? Number(el.value) : NaN; }
+    function fmt(n, d=1) { return Number.isFinite(n) ? n.toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d}) : '—'; }
+    function showCalc(id, html, kind='') { const el=document.getElementById(id); if(!el) return; el.innerHTML=html; el.className='calc-result'+(kind?' '+kind:''); }
+
+    function calcPotassium() {
+        const k=num('kNow'), goal=num('kGoal'), dose=num('kDose'), strength=num('kStrength'), amp=num('kAmp'), finalVol=num('kDiluent'), rate=num('kRate'), access=document.getElementById('kAccess').value;
+        if (![k,goal,dose,strength,amp,finalVol,rate].every(Number.isFinite) || strength<=0 || amp<=0 || finalVol<=0 || dose<=0 || rate<=0) { showCalc('kResult','Revise os campos: todos devem conter valores positivos válidos.','danger'); return; }
+        const ml=dose/strength, ampCount=ml/amp, conc=dose/(finalVol/1000), minVol=dose/40*1000, hours=dose/rate;
+        let warnings=[]; let kind='';
+        if(k>=3.5) warnings.push('K atual não está em faixa de hipocalemia: confirme a indicação de reposição.');
+        if(goal<=k) warnings.push('A meta inserida não é maior que o K atual.');
+        if(access==='peripheral' && conc>40.0001) { warnings.push('CONCENTRAÇÃO acima de 40 mEq/L para acesso periférico: aumentar volume final ou usar protocolo/acesso central.'); kind='danger'; }
+        if(access==='peripheral' && rate>10.0001) { warnings.push('VELOCIDADE acima de 10 mEq/h: não usar em periférico como rotina; reavaliar protocolo e acesso.'); kind='danger'; }
+        if(access==='central' && rate>10) { warnings.push('Velocidade >10 mEq/h: requer protocolo institucional, monitorização contínua e ambiente apropriado; >20 mEq/h exige ECG contínuo.'); kind='warning'; }
+        if(access==='central' && conc>40) warnings.push('Concentração central elevada: validar limite exato com farmácia/protocolo local.');
+        if(k<2.5) warnings.push('K <2,5: hipocalemia grave; avaliação sênior, ECG/monitorização e reposição IV hospitalar.');
+        if(k<3.0 && k>=2.5) warnings.push('Hipocalemia moderada: via oral costuma ser preferida se estável e TGI funcionante; IV se indicação clínica.');
+        if(k<3.5) warnings.push('Verificar Mg, creatinina/eTFG, diurese e ECG; reavaliar K após cada etapa.');
+        const delta=goal-k;
+        const html=`<strong>Resultado matemático para a dose já prescrita:</strong><br>Diferença até a meta: ${fmt(delta,1)} mEq/L (não representa déficit corporal).<br>Dose selecionada: <strong>${fmt(dose,0)} mEq</strong>.<br>Volume de concentrado: <strong>${fmt(ml,2)} mL</strong>.<br>Equivalente: <strong>${fmt(ampCount,2)} ampola(s)</strong> de ${fmt(amp,1)} mL (arredondar para cima apenas para separar ampola; medir volume exato prescrito).<br>Concentração final na bolsa: <strong>${fmt(conc,1)} mEq/L</strong>.<br>Volume final mínimo para 40 mEq/L: <strong>${fmt(minVol,0)} mL</strong>.<br>Tempo matemático à velocidade inserida: <strong>${fmt(hours,2)} h</strong>.<br><br><strong>Checagem de acesso: ${access==='peripheral'?'PERIFÉRICO':'CENTRAL'}</strong><br>${warnings.length?warnings.map(x=>'• '+x).join('<br>'):'Sem alerta matemático pelos limites inseridos; ainda requer validação clínica e protocolo.'}<br><br><em>Não administrar em bolus. Preferir bolsa pronta; conferir rótulo, compatibilidade, volume final real, bomba e dupla checagem.</em>`;
+        showCalc('kResult',html,kind);
+    }
+
+    function calcSodium() {
+        const na=num('naMeasured'), glu=num('glucose'), wt=num('naWeight'), factor=num('naProfile'), target=num('naTarget'), corr=num('naCorrectionFactor');
+        if (![na,glu,wt,factor,target,corr].every(Number.isFinite) || na<90 || na>200 || glu<0 || wt<=0 || target<=0) { showCalc('naResult','Revise os valores inseridos.','danger'); return; }
+        const corrected=na+(Math.max(0,glu-100)/100)*corr;
+        let result=`<strong>Na corrigido pela glicemia:</strong> ${fmt(corrected,1)} mEq/L (Na medido ${fmt(na,1)}).`;
+        let kind='';
+        if(corrected>145) {
+            const tbw=wt*factor; const deficit=tbw*((corrected/target)-1);
+            result+=`<br><strong>Hipernatremia:</strong> água corporal total estimada ${fmt(tbw,1)} L; déficit estimado de água livre até Na ${fmt(target,0)}: <strong>${fmt(deficit,2)} L</strong>.`;
+            result+='<br>Este volume não inclui manutenção nem perdas contínuas. Não infundir todo o déficit sem plano temporal. Se choque, restaurar perfusão com isotônico antes de água livre; reavaliar Na e diurese frequentemente.';
+            kind='warning';
+        } else if(corrected<135) {
+            result+=`<br><strong>Hiponatremia:</strong> déficit não deve ser calculado como volume simples. Avaliar osmolaridade, volemia, duração, sintomas, glicemia e Na urinário.`;
+            result+='<br>Se sintomas neurológicos graves, NaCl 3% em bolus conforme protocolo; alvo inicial de aumento ~4–6 mEq/L, evitando ultrapassar limites diários. Em geral, limite conservador ≤8 mEq/L/24 h em alto risco; monitorização estreita.';
+            kind='warning';
+        } else {
+            result+='<br>Na corrigido dentro da faixa aproximada de referência (135–145 mEq/L). Interpretar com osmolaridade e quadro clínico.';
+        }
+        result+='<br><br><em>Estimativas não prescritivas. O fator de correção da glicose varia em hiperglicemia acentuada; fórmula não substitui avaliação clínica.</em>';
+        showCalc('naResult',result,kind);
+    }
+
+    function calcMagnesium() {
+        const dose=num('mgDose'), strength=num('mgStrength'), amp=num('mgAmp'), target=num('mgFinal');
+        if (![dose,strength,amp,target].every(Number.isFinite) || dose<=0 || strength<=0 || amp<=0 || target<=0) { showCalc('mgResult','Revise os campos.','danger'); return; }
+        const ml=dose/strength, amps=ml/amp, totalVol=dose/target, diluent=Math.max(0,totalVol-ml), finalPct=target*100;
+        const mmol=dose*4;
+        let warning=''; let kind='';
+        if(strength===0.5 && target>0.1) { warning='Concentrado MgSO₄ 50% precisa ser diluído; concentração periférica acima de 10% não é apropriada como rotina. A opção 20% exige protocolo central específico.'; kind='danger'; }
+        else if(target>0.1) { warning='Concentração final >10%: validar acesso central e protocolo institucional.'; kind='warning'; }
+        const html=`<strong>Resultado matemático:</strong><br>Dose: ${fmt(dose,1)} g MgSO₄ ≈ ${fmt(mmol,1)} mmol Mg.<br>Volume do produto: <strong>${fmt(ml,2)} mL</strong>.<br>Equivalente: <strong>${fmt(amps,2)} ampola(s)</strong> de ${fmt(amp,1)} mL.<br>Para concentração final de ${fmt(finalPct,0)}%: volume final aproximado ${fmt(totalVol,1)} mL; diluente aproximado <strong>${fmt(diluent,1)} mL</strong>.<br>Velocidade usual de referência: 1–2 g/h, conforme indicação e protocolo.<br>${warning?'<br><strong>'+warning+'</strong>':''}<br><br><em>Confirmar a equivalência no rótulo (g/mL ou mmol/mL), função renal, dose prescrita, diluente e monitorização. Não administrar MgSO₄ 50% sem diluir.</em>`;
+        showCalc('mgResult',html,kind);
+    }
+
 </script>
 </body>
 </html>
